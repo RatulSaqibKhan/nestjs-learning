@@ -1,0 +1,5 @@
+version: '3.9'
+
+networks:
+  nestjs-app-network:
+    external: true

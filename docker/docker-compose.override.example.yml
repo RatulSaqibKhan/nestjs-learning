@@ -1,0 +1,26 @@
+version: '3.9'
+
+networks:
+  default:
+    driver: ${NETWORKS_DRIVER}
+  nestjs-app-network:
+    external: true
+  common-net:
+    external: true
+
+services:
+
+  nestjs_app_basic_dev:
+    command: ["yarn", "run", "start"]
+    ports:
+      - ${BACKEND_NESTJS_APP_PUBLISH_HTTP_PORT}:3000
+    volumes:
+      - ${DOCKER_BUILD_BACKEND_CONTEXT_DIR}/nestjs_app_basic:/app
+      - nestjs-app-basic-node-modules:/app/node_modules
+    networks:
+      default:
+      common-net:
+        aliases:
+          - common-nestjs-app-basic-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
