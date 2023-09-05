@@ -24,3 +24,17 @@ services:
           - common-nestjs-app-basic-network
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+  nestjs_app_https_support:
+    ports:
+      - ${BACKEND_NESTJS_APP_PUBLISH_HTTPS_PORT}:3000
+    volumes:
+      - ${DOCKER_BUILD_BACKEND_CONTEXT_DIR}/nestjs_app_https_support:/app
+      - nestjs-app-https-support-node-modules:/app/node_modules
+    networks:
+      default:
+      common-net:
+        aliases:
+          - common-nestjs-app-https-support-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

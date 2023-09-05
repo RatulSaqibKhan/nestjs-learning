@@ -1,5 +1,9 @@
 # Building layer
-FROM node:18-alpine AS development
+ARG NODE_VERSION=18
+ARG NODE_IMAGE_TYPE=alpine
+ARG MAINTAINER="Md. Nazmus Saqib Khan <ratulkhan.jhenidah@gmail.com>"
+
+FROM node:${NODE_VERSION}-${NODE_IMAGE_TYPE} AS development
 
 WORKDIR /app
 
@@ -20,7 +24,7 @@ RUN \
 # Copy application sources (.ts, .tsx, js)
 COPY ./codes/nestjs_app_basic/src/ ./src/
 
-# tart Next.js in development mode based on the preferred package manager
+# Build Nest.js based on the preferred package manager
 CMD \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \

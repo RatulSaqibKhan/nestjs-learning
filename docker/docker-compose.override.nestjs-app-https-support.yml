@@ -1,0 +1,22 @@
+version: '3.9'
+
+volumes:
+  nestjs-app-https-support-node-modules:
+    driver: ${VOLUMES_DRIVER}
+    name: 'nestjs-app-https-support-node-modules'
+
+services:
+
+  nestjs_app_https_support:
+    image: ${COMPOSE_PROJECT_NAME}_https_support
+    build:
+      context: ${DOCKER_BUILD_CONTEXT_DIR}
+      dockerfile: docker/dockerfiles/nestjs_app_https_support.Dockerfile
+    restart: always
+    env_file:
+      - .envs/nestjs-app-https-support.env
+    networks:
+      default:
+      nestjs-app-network:
+        aliases:
+          - nestjs-app-https-support-network
