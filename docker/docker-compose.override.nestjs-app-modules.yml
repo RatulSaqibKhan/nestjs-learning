@@ -1,0 +1,22 @@
+version: '3.9'
+
+volumes:
+  nestjs-app-modules-node-modules:
+    driver: ${VOLUMES_DRIVER}
+    name: 'nestjs-app-modules-node-modules'
+
+services:
+
+  nestjs_app_modules:
+    image: ${COMPOSE_PROJECT_NAME}_modules
+    build:
+      context: ${DOCKER_BUILD_CONTEXT_DIR}
+      dockerfile: docker/dockerfiles/nestjs_app_modules.Dockerfile
+    restart: always
+    env_file:
+      - .envs/nestjs-app-modules.env
+    networks:
+      default:
+      nestjs-app-network:
+        aliases:
+          - nestjs-app-modules-network
