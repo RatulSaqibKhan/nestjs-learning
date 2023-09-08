@@ -15,6 +15,11 @@ async function bootstrap() {
     httpsOptions,
   });
 
+  /**
+   * Adding validation pipe to validate requests
+   * whitelist: passed only whitelisted parameters from request
+   * forbidNonWhitelisted: forbidding non whitelisted params returning 4xx
+   */
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
